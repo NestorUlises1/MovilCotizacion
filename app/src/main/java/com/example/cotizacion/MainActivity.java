@@ -35,16 +35,21 @@ public class MainActivity extends AppCompatActivity {
         btnCotizacion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                int numCotizacion=Integer.parseInt(txtNumCotizacion.getText().toString());
-                String descripcion=txtDescripcion.getText().toString();
-                double precio= Double.parseDouble(txtPrecio.getText().toString());
-                int porcentaje=Integer.parseInt(txtPorcentaje.getText().toString());
-                int plazo=Integer.parseInt(txtPlazo.getText().toString());
-                Cotizacion cotizacion=new Cotizacion(numCotizacion,descripcion,precio,porcentaje,plazo);
-                lblDatos.setText(cotizacion.toString()+
-                        "\nCalculoInicial: "+cotizacion.calculoInicial()+ "\n Total a financiar: "+
-                        cotizacion.totalFinanciar()+"\n Pago mensual: "+cotizacion.pagoMensual());
-
+                if(txtNumCotizacion.getText().toString().matches("")||txtDescripcion.getText().toString().matches("")||
+                txtPrecio.getText().toString().matches("")||txtPorcentaje.getText().toString().matches("")||txtPlazo.getText().toString().matches("")){
+                    Toast.makeText(MainActivity.this,"Favor de llenar todos los campos",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    int numCotizacion=Integer.parseInt(txtNumCotizacion.getText().toString());
+                    String descripcion=txtDescripcion.getText().toString();
+                    double precio= Double.parseDouble(txtPrecio.getText().toString());
+                    int porcentaje=Integer.parseInt(txtPorcentaje.getText().toString());
+                    int plazo=Integer.parseInt(txtPlazo.getText().toString());
+                    Cotizacion cotizacion=new Cotizacion(numCotizacion,descripcion,precio,porcentaje,plazo);
+                    lblDatos.setText(cotizacion.toString()+
+                            "\nCalculoInicial: "+cotizacion.calculoInicial()+ "\n Total a financiar: "+
+                            cotizacion.totalFinanciar()+"\n Pago mensual: "+cotizacion.pagoMensual());
+                }
             }
         });
     }
